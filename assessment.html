@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bundle & Save</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+            margin: 0;
+        }
+
+        .container {
+            width: 380px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .lined-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: red;
+        }
+
+        .lined-text::before,
+        .lined-text::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #bbb;
+            margin: 0 10px;
+        }
+
+        .offer {
+            border: 2px solid #ccc;
+            padding: 10px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            border-radius: 5px;
+        }
+
+        .offer.selected {
+            border-color: #ff6699;
+            background-color: #ffe6eb;
+        }
+
+        .offer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .left-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .discount {
+            color: white;
+            background-color: red;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .most-popular {
+            position: absolute;
+            top: -12px;
+            right: 10px;
+            background: #ff6699;
+            padding: 4px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .price {
+            text-align: right;
+        }
+
+        .price strong {
+            font-size: 16px;
+            color: black;
+        }
+
+        .price .old-price {
+            position: relative;
+            left: -10px;
+            text-decoration: line-through;
+            font-size: 14px;
+            color: gray;
+        }
+
+        .options {
+            position: relative;
+            left: 30px;
+            display: none;
+            margin-top: 10px;
+            
+        }
+
+        .offer.selected .options {
+            display: block;
+        }
+
+        .dropdown-labels {
+            display: flex;
+            gap: 54px;
+            position: relative;
+            left: 30px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-weight: lighter;
+        }
+
+        .option-row {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 8px;
+        }
+
+        .option-label {
+            font-weight: lighter;
+            min-width: 25px;
+            text-align: center;
+        }
+
+        .dropdowns {
+            display: flex;
+            gap: 5px;
+        }
+
+        select {
+            width: 80px;
+            padding: 5px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: -15px;
+            font-weight: lighter;
+        }
+
+        .free-shipping {
+            color: red;
+        }
+
+        .add-to-cart {
+            margin-top: -50px;
+            background: red;
+            color: white;
+            padding: 12px;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .unit{
+            font-weight: bolder;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="lined-text">YAY! It's BOGO</p>
+
+        <div class="offer" onclick="selectOffer(this, 'options-1')">
+            <div class="offer-header">
+                <div class="left-section">
+                    <input type="radio" name="unit">
+                    <span class="unit">1 Unit</span>
+                    <span class="discount">10% Off</span>
+                </div>
+                <div class="price">
+                    <strong>$10.00 USD</strong><br>
+                    <span class="old-price">$24.00 USD</span>
+                </div>
+            </div>
+            <div class="options">
+                <div class="dropdown-labels">
+                    <span>Size</span>
+                    <span>Color</span>
+                </div>
+                <div class="option-row">
+                    <span class="option-label">#1</span>
+                    <div class="dropdowns">
+                        <select><option>S</option><option>M</option></select>
+                        <select><option>Black</option><option>Blue</option></select>
+                    </div>
+                </div>
+                <div class="option-row">
+                    <span class="option-label">#2</span>
+                    <div class="dropdowns">
+                        <select><option>S</option><option>M</option></select>
+                        <select><option>Colour</option><option>Blue</option></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="offer" onclick="selectOffer(this, 'options-2')">
+            <span class="most-popular">Most Popular</span>
+            <div class="offer-header">
+                <div class="left-section">
+                    <input type="radio" name="unit">
+                    <span class="unit">2 Unit</span>
+                    <span class="discount">20% Off</span>
+                </div>
+                <div class="price">
+                    <strong>$18.00 USD</strong><br>
+                    <span class="old-price">$24.00 USD</span>
+                </div>
+            </div>
+            <div class="options" id="options-2">
+                <div class="dropdown-labels">
+                    <span>Size</span>
+                    <span>Color</span>
+                </div>
+                <div class="option-row">
+                    <span class="option-label">#1</span>
+                    <div class="dropdowns">
+                        <select><option>S</option><option>M</option></select>
+                        <select><option>Black</option><option>Blue</option></select>
+                    </div>
+                </div>
+                <div class="option-row">
+                    <span class="option-label">#2</span>
+                    <div class="dropdowns">
+                        <select><option>S</option><option>M</option></select>
+                        <select><option>Colour</option><option>Blue</option></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="offer" onclick="selectOffer(this, 'options-3')">
+            <div class="offer-header">
+                <div class="left-section">
+                    <input type="radio" name="unit">
+                    <span class="unit">3 Unit</span>
+                    <span class="discount">30% Off</span>
+                </div>
+                <div class="price">
+                    <strong>$24.00 USD</strong><br>
+                    <span class="old-price">$36.00 USD</span>
+                </div>
+            </div>
+            <div class="options" id="options-3">
+                <div class="dropdown-labels">
+                    <span>Size</span>
+                    <span>Color</span>
+                </div>
+                <div class="option-row">
+                    <span class="option-label">#1</span>
+                    <div class="dropdowns">
+                        <select><option>S</option><option>M</option></select>
+                        <select><option>Black</option><option>Blue</option></select>
+                    </div>
+                </div>
+                <div class="option-row">
+                    <span class="option-label">#2</span>
+                    <div class="dropdowns">
+                        <select><option>S</option><option>M</option></select>
+                        <select><option>Colour</option><option>Blue</option></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p class="free-shipping">Free Delivery</p>
+            <p>Total: $18.00 USD</p>
+        </div>
+
+        <button class="add-to-cart">+ Add to Cart</button>
+    </div>
+
+    <script>
+        function selectOffer(selectedOffer) {
+            document.querySelectorAll(".offer").forEach(offer => offer.classList.remove("selected"));
+            selectedOffer.classList.add("selected");
+        }
+    </script>
+</body>
+</html>
